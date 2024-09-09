@@ -1,0 +1,77 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id("com.google.gms.google-services") // Ensure this is applied correctly
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+android {
+    namespace "com.example.a_guarante"
+    compileSdkVersion 34 // Ensure this matches your project's compile SDK version
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "com.example.a_guarante"
+        minSdkVersion 23 // Ensure this matches your project's minimum SDK version
+        targetSdkVersion 34 // Ensure this matches your project's target SDK version
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true // Enable MultiDex if needed
+    }
+
+    buildTypes {
+        release {
+            // Add your own signing config for the release build.
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-base:18.1.0'
+    implementation 'com.google.firebase:firebase-core:21.1.0'
+    implementation platform('com.google.firebase:firebase-bom:32.7.0') // Use the BOM to manage Firebase versions
+    implementation 'com.google.firebase:firebase-messaging' // Use Firebase Messaging without a specific version
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-auth' // Optional, if you use Firebase Auth
+    implementation 'com.google.firebase:firebase-storage' // Optional, if you use Firebase Storage
+}
+
+// Apply the Google Services plugin
+apply plugin: 'com.google.gms.google-services'

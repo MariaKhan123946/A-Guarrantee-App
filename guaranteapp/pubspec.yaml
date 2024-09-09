@@ -1,0 +1,45 @@
+name: a_guarante
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  cloud_firestore:
+  file_picker:
+  firebase_auth:
+  firebase_core:
+  firebase_messaging:
+  firebase_storage:
+  flutter_facebook_auth:
+  flutter_secure_storage:
+  google_sign_in:
+  intl:
+  path_provider:
+  image_picker:
+  url_launcher:
+  flutter_pdfview:
+  pdfx:
+  flutter_local_notifications:
+  fluttertoast:
+  dio:
+  permission_handler:
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - images/
+
